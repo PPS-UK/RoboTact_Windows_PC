@@ -5,7 +5,7 @@ pipeline {
         }
     }
     options {
-        copyArtifactPermission('/AD7166/Sign and Deploy SysConfigV2')
+        copyArtifactPermission('/Customer Apps/Sign and Deploy RoboTact USB')
     }
     stages {
         stage('Build') {
@@ -27,7 +27,7 @@ pipeline {
                     powershell 'dotnet publish RoboTact/RoboTact.csproj -p:PublishProfile=FolderProfile /p:AssemblyVersion=$env:version /p:Version=$env:version'
                 }
                 archiveArtifacts artifacts: 'RoboTact/target/publish/**', followSymlinks: false
-                build wait: false, job: '/AD7166/Sign and Deploy SysConfigV2', parameters: [string(name: 'gitTag', value: TAG_NAME)]
+                build wait: false, job: '/Customer Apps/Sign and Deploy RoboTact USB', parameters: [string(name: 'gitTag', value: TAG_NAME)]
             }
         }
     }
