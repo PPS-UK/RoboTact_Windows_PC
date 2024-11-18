@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                powershell '''dotnet restore ConfigFileCreator/SystemConfigurationTool.csproj
-        dotnet build -c Release --self-contained -r win-x64  ConfigFileCreator/SystemConfigurationTool.csproj'''
+                powershell '''dotnet restore RoboTact/RoboTact.csproj
+        dotnet build -c Release --self-contained -r win-x64  RoboTact/RoboTact.csproj'''
             }
         }
 
@@ -24,9 +24,9 @@ pipeline {
                 }
                 withEnv(['version =  $Version']) {
                     powershell 'echo $env:version'
-                    powershell 'dotnet publish ConfigFileCreator/SystemConfigurationTool.csproj -p:PublishProfile=FolderProfile /p:AssemblyVersion=$env:version /p:Version=$env:version'
+                    powershell 'dotnet publish RoboTact/RoboTact.csproj -p:PublishProfile=FolderProfile /p:AssemblyVersion=$env:version /p:Version=$env:version'
                 }
-                archiveArtifacts artifacts: 'ConfigFileCreator/target/publish/**', followSymlinks: false
+                archiveArtifacts artifacts: 'RoboTact/target/publish/**', followSymlinks: false
                 build wait: false, job: '/AD7166/Sign and Deploy SysConfigV2', parameters: [string(name: 'gitTag', value: TAG_NAME)]
             }
         }
