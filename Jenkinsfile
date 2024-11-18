@@ -26,7 +26,7 @@ pipeline {
                     powershell 'echo $env:version'
                     powershell 'dotnet publish RoboTact/RoboTact.csproj -p:PublishProfile=FolderProfile /p:AssemblyVersion=$env:version /p:Version=$env:version'
                 }
-                archiveArtifacts artifacts: 'output/**', followSymlinks: false
+                archiveArtifacts artifacts: 'RoboTact/target/publish/**', followSymlinks: false
                 build wait: false, job: '/Customer Apps/Sign and Deploy RoboTact USB', parameters: [string(name: 'gitTag', value: TAG_NAME)]
             }
         }
