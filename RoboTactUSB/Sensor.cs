@@ -185,7 +185,7 @@ namespace RoboTactUSB
             double[] calibratedData = new double[12];
             for (int i = 0; i < 12; i++)
             {
-                calibratedData[i] = data[i] / 1000.0;
+                calibratedData[i] = data[i] / 2600.00 * 40.00;
 
                 // Avoid very low values affecting calculations
                 if (calibratedData[i] < 0.1)

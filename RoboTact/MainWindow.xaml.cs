@@ -63,6 +63,8 @@ namespace RoboTact
             InitializeViews();
             InitializeChart();
             InitializeTimer();
+            foreach (var sensor in RoboTact_.sensors)
+                sensor.ResetBaseline();
         }
 
         private void OnSlipDetected(object sender, SlipDetectedEventArgs e)
@@ -116,7 +118,7 @@ namespace RoboTact
         // Set up chart properties
         private void InitializeChart()
         {
-            chart.YAxes = new Axis[] { new Axis { MinLimit = 0, MaxLimit = 500 } };
+            chart.YAxes = new Axis[] { new Axis { MinLimit = 0, MaxLimit = 60 } };
         }
 
         // Configure and start the update timer
@@ -180,7 +182,7 @@ namespace RoboTact
                 {
                     views[index].X = x;
                     views[index].Y = y;
-                    views[index].Radius = frames[index].TotalPressure;
+                    views[index].Radius = frames[index].TotalPressure * 1.5;
 
                     // Update window title with scan rate if sufficient data points exist
                     if (RoboTact_.sensors[0].deltaT.Count > 10 
