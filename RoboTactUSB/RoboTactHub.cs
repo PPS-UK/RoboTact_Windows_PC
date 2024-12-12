@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace RoboTactUSB
 {
     // Class representing a RoboTact sensor with serial communication and data processing
-    public class RoboTactSensor
+    public class RoboTactHub
     {
         private SerialPort serialPort_; // Serial port for communication
         private const int responseCommandOffset = 0; // Offset for response commands
@@ -27,7 +27,7 @@ namespace RoboTactUSB
         public List<Sensor> sensors = new List<Sensor> { new Sensor(0), new Sensor(1), new Sensor(2), new Sensor(3) };
 
         // Constructor initializes serial communication with sensor
-        public RoboTactSensor()
+        public RoboTactHub()
         {
             // Attempt to find the COM port associated with the sensor's VID/PID
             string portName_ = FindComPortByVidPid("15C5", "0107");

@@ -87,8 +87,8 @@ namespace RoboTactUSB
             }
 
             // Return zero values if small pressure is applied
-            if (totalPressure < 0.1)
-                return (0, 0, 0);
+            if (totalPressure < 3)
+                return (0, 0, totalPressure);
 
             // Calculate weighted average positions
             double centerX = weightedX / totalPressure;

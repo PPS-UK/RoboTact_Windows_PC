@@ -25,7 +25,7 @@ namespace RoboTact
         public ISeries[] Series { get; set; }
 
         // RoboTact sensor and frames
-        private RoboTactSensor RoboTact_ = new RoboTactSensor();
+        private RoboTactHub RoboTact_ = new RoboTactHub();
         private SensorFrame[] frames = new SensorFrame[4];
 
         // Timer for periodic updates
@@ -89,7 +89,7 @@ namespace RoboTact
         }
 
         // Event handler for RoboTact sensor data update
-        private void RoboTact__RobotactAction(object sender, RoboTactSensor.EventRobotactActionArgs e)
+        private void RoboTact__RobotactAction(object sender, RoboTactHub.EventRobotactActionArgs e)
         {
             int sensorID = e.frame.SensorID;
             frames[sensorID] = e.frame;
@@ -183,6 +183,7 @@ namespace RoboTact
                     views[index].X = x;
                     views[index].Y = y;
                     views[index].Radius = frames[index].TotalPressure * 1.5;
+                    views[index].Radius = views[index].Radius < 3 ? 0 : views[index].Radius;
 
                     // Update window title with scan rate if sufficient data points exist
                     if (RoboTact_.sensors[0].deltaT.Count > 10 
