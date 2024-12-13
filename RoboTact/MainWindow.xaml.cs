@@ -118,7 +118,7 @@ namespace RoboTact
         // Set up chart properties
         private void InitializeChart()
         {
-            chart.YAxes = new Axis[] { new Axis { MinLimit = 0, MaxLimit = 60 } };
+            chart.YAxes = new Axis[] { new Axis { MinLimit = 0, MaxLimit = 60, Name="Pressure(psi)" } };
         }
 
         // Configure and start the update timer
