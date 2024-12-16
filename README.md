@@ -1,6 +1,6 @@
 # RoboTact
 
-RoboTact is a .NET8-based application designed to interface with tactile sensors, potentially for use in robotics applications that require tactile feedback. This repository includes the main application and USB interfacing code to manage and interpret sensor data.
+RoboTact is a .NET8-based application designed to interface with [PPS RoboTact](https://www.pressureprofile.com/) sensors, potentially for use in robotics applications that require tactile feedback. This repository includes the main application and USB interfacing code to manage and interpret sensor data.
 
 ## Project Structure
 
