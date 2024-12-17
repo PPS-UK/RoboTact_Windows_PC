@@ -34,6 +34,9 @@ namespace RoboTactUSB
 
         private CancellationTokenSource slipDetectionCancellationTokenSource;
 
+        private const double EXP_DECAY_FACTOR = 5; // Smoothing factor for the exponential decay filter
+        private double[] filteredData = new double[12]; // Filtered values for the 12 sensor elements
+
         // Constructor: initializes the sensor with an ID, sets baseline, and starts slip detection
         public Sensor(int id)
         {
@@ -185,11 +188,15 @@ namespace RoboTactUSB
             double[] calibratedData = new double[12];
             for (int i = 0; i < 12; i++)
             {
-                calibratedData[i] = data[i] / 2600.00 * 40.00;
+                double rawValue = data[i] / 2600.00 * 40.00;
+
+                filteredData[i] = 1.00 * rawValue / EXP_DECAY_FACTOR + (1.00 - 1.00 / EXP_DECAY_FACTOR) * filteredData[i];
 
                 // Avoid very low values affecting calculations
-                if (calibratedData[i] < 0.1)
-                    calibratedData[i] = 0;
+                if (filteredData[i] < 0.1)
+                    filteredData[i] = 0;
+
+                calibratedData[i] = Math.Round(filteredData[i], 2);
             }
 
             // Set frame metadata

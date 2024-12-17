@@ -14,14 +14,8 @@ namespace RoboTactUSB
     public class RoboTactHub
     {
         private SerialPort serialPort_; // Serial port for communication
-        private const int responseCommandOffset = 0; // Offset for response commands
 
         private List<byte> incomingSerialBuffer_ = new List<byte>(); // Buffer for incoming serial data
-        private List<byte[]> packetLet = new List<byte[]>(); // Temporary storage for packets
-        private List<byte[]> processed = new List<byte[]>(); // Storage for processed packets
-
-        // FIFO queue for managing responses based on commands
-        private Dictionary<int, ConcurrentQueue<byte[]>> responseFifo_ = new Dictionary<int, ConcurrentQueue<byte[]>>();
 
         // List of associated sensor objects
         public List<Sensor> sensors = new List<Sensor> { new Sensor(0), new Sensor(1), new Sensor(2), new Sensor(3) };
