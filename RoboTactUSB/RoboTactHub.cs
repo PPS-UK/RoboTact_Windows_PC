@@ -133,7 +133,7 @@ namespace RoboTactUSB
             byte[] buffer = new byte[bytesToRead];
             byte checksum = 0;
             serialPort_.Read(buffer, 0, buffer.Length);
-            incomingSerialBuffer_ = buffer.ToList();
+            incomingSerialBuffer_.AddRange(buffer);
 
             // Ensure buffer has enough data to process
             if (incomingSerialBuffer_.Count < 38)
